@@ -10,52 +10,68 @@
       text-align: center;
       background: url('https://raw.githubusercontent.com/ailo-florence/qr-links/refs/heads/main/image.html') no-repeat center center fixed;
       background-size: cover;
-      padding: 50px;
-}
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end; /* mette i bottoni in basso */
+    }
 
-    }
     h1 {
-      color: #333;
+      color: #fff;
+      text-shadow: 2px 2px 5px #000;
+      margin-bottom: auto; /* spinge l'header in alto */
+      padding-top: 30px;
     }
+
+    .link-container {
+      margin: 30px;
+    }
+
     a {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       margin: 15px auto;
       padding: 15px 20px;
       width: 250px;
       text-decoration: none;
-      background: #0073e6;
+      background: linear-gradient(45deg, #b30000, #ff0000, #006600, #009900);
       color: white;
-      border-radius: 8px;
+      border-radius: 12px;
       font-size: 18px;
-      transition: background 0.3s;
+      font-weight: bold;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
+
     a:hover {
-      background: #005bb5;
+      transform: scale(1.05);
+      box-shadow: 0px 6px 12px rgba(0,0,0,0.5);
+    }
+
+    img.icon {
+      width: 24px;
+      height: 24px;
     }
   </style>
-
-  <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=TUO_ID_GA4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-0SS8S19FHM');
-</script>
-  
 </head>
 <body>
-  <h1>Scegli dove andare 👇</h1>
-  
-  <a href="https://link1.com" target="_blank">🔗 Link 1</a>
-  <a href="https://link2.com" target="_blank">🔗 Link 2</a>
-  <a href="https://link3.com" target="_blank">🔗 Link 3</a>
-  
+  <h1>🎅 Buone Feste! 🎄</h1>
+
+  <div class="link-container">
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/TUO_PROFILO" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="icon" alt="Instagram">
+      Instagram
+    </a>
+
+    <!-- Website -->
+    <a href="https://ailo-florence.org" target="_blank">
+      🌐 Website
+    </a>
+  </div>
 </body>
 </html>
-
-
-
-
-
-
