@@ -12,6 +12,7 @@
       background: #f5f5f5;
     }
 
+    /* Immagine principale responsiva */
     .hero {
       width: 100%;
       height: auto;
@@ -52,37 +53,26 @@
       width: 24px;
       height: 24px;
     }
-
-    #countdown {
-      font-size: 26px;
-      font-weight: bold;
-      margin: 20px 0;
-      color: #b30000;
-      animation: pulse 2s infinite;
-      transition: color 0.5s ease-in-out;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.7; transform: scale(1.05); }
-      100% { opacity: 1; transform: scale(1); }
-    }
   </style>
 </head>
 <body>
-  <!-- Immagine principale -->
-  <img src="https://raw.githubusercontent.com/ailo-florence/qr-links/main/image.jpg" alt="Sfondo" class="="countdown"></div>
+  <!-- Immagine (si adatta allo schermo e fa scorrere la pagina intera) -->
+  <img src="https://raw.githubusercontent.com/ailo-florence/qr-links/refs/heads/main/image.jpg" alt="Sfondo" class="hero">
 
   <!-- Contenitore link -->
   <div class="link-container">
     <!-- Instagram -->
-    <a href="https://www.instagram.com/TUO_PROFILO" target="_blankupload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class    </a>
+    <a href="https://www.instagram.com/TUO_PROFILO" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="icon" alt="Instagram">
+      Instagram
+    </a>
 
     <!-- Website -->
-    <a href="https://ailo-florence.org" target="_blank>
+    <a href="https://ailo-florence.org" target="_blank">
+      🌐 Website
+    </a>
   </div>
-
 </body>
 </html>
 
-
+potresti inserire un countdown con giorni. e poi quando manca un giorno metterei ore minuti e secondi. il coundown deve essere per la mezzanotte di venerdì 21 novembre
