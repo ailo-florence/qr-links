@@ -53,12 +53,94 @@
       width: 24px;
       height: 24px;
     }
+        /* Countdown carino */
+    .countdown {
+      margin: 20px auto;
+      max-width: 520px;
+      padding: 10px 16px;
+    }
+    
+    .countdown .timer {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      justify-items: stretch;
+    }
+    
+    .countdown .box {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 12px 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+    }
+    
+    .countdown .num {
+      font-size: 32px;
+      font-weight: 800;
+      color: #111;
+      line-height: 1;
+      letter-spacing: 0.5px;
+    }
+    
+    .countdown .label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #666;
+      margin-top: 6px;
+    }
+    
+    .countdown .message {
+      margin-top: 12px;
+      color: #444;
+    }
+    
+    /* Effetto quando finisce (riusa i tuoi colori a gradiente) */
+    .countdown.finished .box {
+      color: #fff;
+      background: linear-gradient(45deg, #b30000, #ff0000, #006600, #009900);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+      animation: pop 0.6s ease-out;
+    }
+    
+    @keyframes pop {
+      0%   { transform: scale(0.98); }
+      50%  { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+    
+    @media (max-width: 420px) {
+      .countdown .num { font-size: 26px; }
+    }
+
   </style>
 </head>
 <body>
   <!-- Immagine (si adatta allo schermo e fa scorrere la pagina intera) -->
   <img src="https://raw.githubusercontent.com/ailo-florence/qr-links/refs/heads/main/image.jpg" alt="Sfondo" class="hero">
-
+  <!-- Conto alla rovescia -->
+  <div id="countdown" class="countdown" role="timer" aria-live="polite"
+       aria-label="Conto alla rovescia fino al 21 novembre, ore 00:00">
+    <div class="timer">
+      <div class="box">
+        <div id="cd-days" class="num">00</div>
+        <div class="label">Giorni</div>
+      </div>
+      <div class="box">
+        <div id="cd-hours" class="num">00</div>
+        <div class="label">Ore</div>
+      </div>
+      <div class="box">
+        <div id="cd-minutes" class="num">00</div>
+        <div class="label">Minuti</div>
+      </div>
+      <div class="box">
+        <div id="cd-seconds" class="num">00</div>
+        <div class="label">Secondi</div>
+      </div>
+    </div>
+    <p id="cd-message" class="message"></p>
+  </div>
   <!-- Contenitore link -->
   <div class="link-container">
     <!-- Instagram -->
@@ -72,7 +154,9 @@
       🌐 Website
     </a>
   </div>
+script.js</script>
 </body>
 </html>
 
-potresti inserire un countdown con giorni. e poi quando manca un giorno metterei ore minuti e secondi. il coundown deve essere per la mezzanotte di venerdì 21 novembre
+
+
