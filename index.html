@@ -12,7 +12,6 @@
       background: #f5f5f5;
     }
 
-    /* Immagine principale responsiva */
     .hero {
       width: 100%;
       height: auto;
@@ -53,24 +52,70 @@
       width: 24px;
       height: 24px;
     }
+
+    #countdown {
+      font-size: 26px;
+      font-weight: bold;
+      margin: 20px 0;
+      color: #b30000;
+      animation: pulse 2s infinite;
+      transition: color 0.5s ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+      100% { opacity: 1; transform: scale(1); }
+    }
   </style>
 </head>
 <body>
-  <!-- Immagine (si adatta allo schermo e fa scorrere la pagina intera) -->
-  <img src="https://raw.githubusercontent.com/ailo-florence/qr-links/refs/heads/main/image.jpg" alt="Sfondo" class="hero">
+  <!-- Immagine principale -->
+  <img src="https://raw.githubusercontent.com/ailo-florence/qr-links/refs/heads/main/image.jpgountdown -->
+  <div id="countdown"></div>
 
   <!-- Contenitore link -->
   <div class="link-container">
     <!-- Instagram -->
-    <a href="https://www.instagram.com/TUO_PROFILO" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="icon" alt="Instagram">
+    <a href="https://www.instagram.com/TUO      <img src="https://upload.wikimedia.org/wommons/a/a5/Instagram_icon.png
       Instagram
     </a>
 
     <!-- Website -->
-    <a href="https://ailo-florence.org" target="_blank">
-      🌐 Website
-    </a>
+    <a href="https://ailo-florence.org" target="_blank>
   </div>
+
+  <!-- Script countdown -->
+  <script>
+    function updateCountdown() {
+      const countdownElement = document.getElementById("countdown");
+      const targetDate = new Date("2025-11-21T00:00:00");
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        countdownElement.textContent = "È arrivato il giorno!";
+        countdownElement.style.color = "#009900";
+        countdownElement.style.animation = "none";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+      if (days >= 1) {
+        countdownElement.textContent = `Mancano ${days} giorno${days > 1 ? 'i' : ''}`;
+        countdownElement.style.color = "#b30000";
+      } else {
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+        countdownElement.textContent = `Mancano ${hours}h ${minutes}m ${seconds}s`;
+        countdownElement.style.color = "#ff0000";
+      }
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
 </body>
 </html>
