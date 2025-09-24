@@ -210,7 +210,12 @@
     el.hours.textContent   = two(h);
     el.minutes.textContent = two(m);
     el.seconds.textContent = two(s);
-
+    if (el.message) {
+          const parts = [];
+          if (d > 0) parts.push(`${d}g`);
+          if (h > 0 || d > 0) parts.push(`${h}h`);
+          parts.push(`${m}m`, `${s}s`);
+          el.message.textContent = `Manca${d === 1 ? '' : 'no'}: ${parts.join(' ')}`;
     }
   }
 
