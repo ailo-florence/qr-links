@@ -12,101 +12,12 @@
       background: #f5f5f5;
     }
 
-    /* (Prima c'era .hero per <img>, ora usiamo .roll con background) */
-    /* --- ROLL: immagine che si arrotola con lo scroll --- */
-
-    /* Registriamo la custom property animabile */
-    @property --p {
-      syntax: '<percentage>';
-      inherits: false;
-      initial-value: 0%;
-    }
-
-    .roll {
-      /* Cambia l'URL qui sotto con la tua immagine */
-      --img: url('https://raw.githubusercontent.com/ailo-florence/qr-links/refs/heads/main/image.jpg');
-      --r: clamp(16px, 4vw, 28px);  /* spessore del bordo arrotolato */
-      --p: 0%;                      /* avanzamento 0% -> 100% */
-
-      position: relative;
+    /* Immagine principale responsiva */
+    .hero {
       width: 100%;
-      /* 🔧 Imposta l'aspect ratio della tua immagine (cambialo se serve) */
-      aspect-ratio: 16 / 9;         /* es. 3/4, 9/16, 1/1... */
-      margin-inline: auto;
-
-      background: var(--img) center / cover no-repeat;
-      clip-path: inset(0 0 var(--p) 0 round 0); /* taglia dal basso verso l'alto */
-      perspective: 800px;
-      will-change: clip-path;
+      height: auto;
       display: block;
     }
-
-    /* Bordo cilindrico che segue il fronte dell'arrotolamento */
-    .roll::after{
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 100%;
-      height: var(--r);
-      top: calc(100% - var(--p));
-      transform-origin: top;
-      transform: rotateX(55deg);
-      pointer-events: none;
-      opacity: 0;
-
-      background:
-        /* stessa immagine allineata al fronte */
-        var(--img) center calc(100% - var(--p)) / cover no-repeat,
-        /* luce/ombra cilindrica */
-        radial-gradient(120% 70% at 50% 30%,
-                        rgba(255,255,255,.85) 0 30%,
-                        rgba(0,0,0,.45) 75% 100%);
-      background-blend-mode: multiply;
-      border-radius: 999px 999px 0 0 / 70% 70% 0 0;
-      box-shadow: 0 6px 12px rgba(0,0,0,.25);
-    }
-
-    /* Keyframes: animiamo la custom property --p (usata da clip-path e ::after) */
-    @keyframes rollClip{
-      0%   { --p: 0%;   }
-      100% { --p: 100%; }
-    }
-    @keyframes edgeIn{
-      0%   { opacity: 0; }
-      10%  { opacity: 1; }
-      100% { opacity: 1; }
-    }
-
-    /* Attiva l'effetto solo su mobile (puoi cambiare il breakpoint) */
-    @media (max-width: 800px){
-      .roll{
-        animation-name: rollClip;
-        animation-duration: 1s;              /* la durata diventa la “scala” dello scroll */
-        animation-timing-function: linear;
-        animation-fill-mode: both;
-
-        /* timeline guidata dalla visibilità in viewport */
-        animation-timeline: view(block);
-        /* parte quando entra, finisce quando esce dalla viewport */
-        animation-range: entry 0% exit 100%;
-      }
-      .roll::after{
-        animation-name: edgeIn;
-        animation-duration: 1s;
-        animation-timing-function: linear;
-        animation-fill-mode: both;
-        animation-timeline: view(block);
-        animation-range: entry 10% exit 100%;
-      }
-    }
-
-    /* Rispetto preferenze di riduzione movimento */
-    @media (prefers-reduced-motion: reduce){
-      .roll{ animation: none; --p: 0%; }
-      .roll::after{ opacity: 0; }
-    }
-
-    /* ----------------- TUO STILE ESISTENTE ----------------- */
 
     .link-container {
       margin: 20px auto 40px auto;
@@ -142,28 +53,27 @@
       width: 24px;
       height: 24px;
     }
-
-    /* Countdown carino */
+        /* Countdown carino */
     .countdown {
       margin: 20px auto;
       max-width: 520px;
       padding: 10px 16px;
     }
-
+    
     .countdown .timer {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
       justify-items: stretch;
     }
-
+    
     .countdown .box {
       background: #ffffff;
       border-radius: 12px;
       padding: 12px 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.12);
     }
-
+    
     .countdown .num {
       font-size: 32px;
       font-weight: 800;
@@ -171,7 +81,7 @@
       line-height: 1;
       letter-spacing: 0.5px;
     }
-
+    
     .countdown .label {
       font-size: 12px;
       text-transform: uppercase;
@@ -179,35 +89,35 @@
       color: #666;
       margin-top: 6px;
     }
-
+    
     .countdown .message {
       margin-top: 12px;
       color: #444;
     }
-
-    /* Effetto quando finisce */
+    
+    /* Effetto quando finisce (riusa i tuoi colori a gradiente) */
     .countdown.finished .box {
       color: #fff;
       background: linear-gradient(45deg, #b30000, #ff0000, #006600, #009900);
       box-shadow: 0 6px 14px rgba(0,0,0,0.25);
       animation: pop 0.6s ease-out;
     }
-
+    
     @keyframes pop {
       0%   { transform: scale(0.98); }
       50%  { transform: scale(1.03); }
       100% { transform: scale(1); }
     }
-
+    
     @media (max-width: 420px) {
       .countdown .num { font-size: 26px; }
     }
+
   </style>
 </head>
 <body>
-  <!-- Immagine: ora è un DIV con background e scroll-roll -->
-  <div class="roll" role="img" aria-label="Sfondo"></div>
-
+  <!-- Immagine (si adatta allo schermo e fa scorrere la pagina intera) -->
+  <img src="https://raw.githubusercontent.com/ailo-florence/qr-links/refs/heads/main/image.jpg" alt="Sfondo" class="hero">
   <!-- Conto alla rovescia -->
   <div id="countdown" class="countdown" role="timer" aria-live="polite"
        aria-label="Conto alla rovescia fino al 21 novembre, ore 00:00">
@@ -231,77 +141,91 @@
     </div>
     <p id="cd-message" class="message"></p>
   </div>
-
   <!-- Contenitore link -->
   <div class="link-container">
     <!-- Instagram -->
-    <a href="https://www.instagram.com/TUO_PROFILO" target="_ps://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="  </a>
+    <a href="https://www.instagram.com/TUO_PROFILO" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="icon" alt="Instagram">
+      Instagram
+    </a>
 
     <!-- Website -->
-    <a href="https://ailo.org
+    <a href="https://ailo-florence.org" target="_blank">
       🌐 Website
     </a>
   </div>
-
-  <script>
+<script>
   document.addEventListener('DOMContentLoaded', () => {
-    const el = {
-      days:    document.getElementById('cd-days'),
-      hours:   document.getElementById('cd-hours'),
-      minutes: document.getElementById('cd-minutes'),
-      seconds: document.getElementById('cd-seconds'),
-      message: document.getElementById('cd-message'),
-      root:    document.getElementById('countdown')
-    };
+  const el = {
+    days:    document.getElementById('cd-days'),
+    hours:   document.getElementById('cd-hours'),
+    minutes: document.getElementById('cd-minutes'),
+    seconds: document.getElementById('cd-seconds'),
+    message: document.getElementById('cd-message'),
+    root:    document.getElementById('countdown')
+  };
 
-    const now = new Date();
-    const year = now.getFullYear();
+  const now = new Date();
+  const year = now.getFullYear();
 
-    // ⚠️ Nota: nel tuo commento parli di "21 novembre",
-    // ma qui sotto il mese è 8 (= Settembre) e l'ora 14:00.
-    // Se vuoi 21 novembre 00:00, usa new Date(year, 10, 21, 0, 0, 0, 0)
-    let target = new Date(year, 8, 25, 14, 0, 0, 0);
+  // ⚠️ Mesi in JS sono 0-based: 10 = Novembre.
+  // Mezzanotte che apre il 21 novembre (00:00 del 21/11)
+  let target = new Date(year, 8, 25, 13, 0, 0, 0);
 
-    function two(n) {
-      return String(n).padStart(2, '0');
+  // Se volessi "fino a fine 21" (cioè 23:59:59 del 21/11), usa la mezzanotte del 22:
+  // let target = new Date(year, 10, 22, 0, 0, 0, 0);
+
+  function two(n) {
+    return String(n).padStart(2, '0');
+  }
+
+  function renderFinished() {
+    el.days.textContent    = '00';
+    el.hours.textContent   = '00';
+    el.minutes.textContent = '00';
+    el.seconds.textContent = '00';
+    if (el.root) el.root.classList.add('finished');
+    if (el.message) el.message.textContent = 'È arrivato il 21 novembre! 🎉';
+  }
+
+  function update() {
+    const n = new Date();
+    const diff = target - n;
+
+    if (diff <= 0) {
+      clearInterval(timer);
+      renderFinished();
+      return;
     }
 
-    function renderFinished() {
-      el.days.textContent    = '00';
-      el.hours.textContent   = '00';
-      el.minutes.textContent = '00';
-      el.seconds.textContent = '00';
-      if (el.root) el.root.classList.add('finished');
-      if (el.message) el.message.textContent = 'È arrivato il 21 novembre! 🎉';
+    const MS = 1000, MIN = 60 * MS, H = 60 * MIN, D = 24 * H;
+    let remain = diff;
+
+    const d = Math.floor(remain / D);   remain -= d * D;
+    const h = Math.floor(remain / H);   remain -= h * H;
+    const m = Math.floor(remain / MIN); remain -= m * MIN;
+    const s = Math.floor(remain / MS);
+
+    el.days.textContent    = two(d);
+    el.hours.textContent   = two(h);
+    el.minutes.textContent = two(m);
+    el.seconds.textContent = two(s);
+    if (el.message) {
+          const parts = [];
+          if (d > 0) parts.push(`${d}g`);
+          if (h > 0 || d > 0) parts.push(`${h}h`);
+          parts.push(`${m}m`, `${s}s`);
+          
     }
+  }
 
-    function update() {
-      const n = new Date();
-      const diff = target - n;
+  // Se la data è già passata oggi ma vuoi contare all'anno prossimo, scommenta:
+  // if (now > target) target = new Date(year + 1, 10, 21, 0, 0, 0, 0);
 
-      if (diff <= 0) {
-        clearInterval(timer);
-        renderFinished();
-        return;
-      }
-
-      const MS = 1000, MIN = 60 * MS, H = 60 * MIN, D = 24 * H;
-      let remain = diff;
-
-      const d = Math.floor(remain / D);   remain -= d * D;
-      const h = Math.floor(remain / H);   remain -= h * H;
-      const m = Math.floor(remain / MIN); remain -= m * MIN;
-      const s = Math.floor(remain / MS);
-
-      el.days.textContent    = two(d);
-      el.hours.textContent   = two(h);
-      el.minutes.textContent = two(m);
-      el.seconds.textContent = two(s);
-    }
-
-    update(); // primo render immediato
-    const timer = setInterval(update, 1000);
-  });
-  </script>
+  update(); // primo render immediato
+  const timer = setInterval(update, 1000);
+});
+</script>
 </body>
+
 </html>
