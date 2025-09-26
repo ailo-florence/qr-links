@@ -178,6 +178,12 @@
   function two(n) {
     return String(n).padStart(2, '0');
   }
+    
+  if (now >= target) {
+  renderFinished();
+  } else {
+    update(); // primo render immediato
+    const timer = setInterval(update, 1000);
 
   function renderFinished() {
     el.days.textContent    = '00';
@@ -229,4 +235,5 @@
 </body>
 
 </html>
+
 
