@@ -83,22 +83,30 @@
     }
     
     .countdown .label {
-      font-size: 12px;
+      font-size: 18px;
       text-transform: uppercase;
       letter-spacing: .08em;
-      color: #666;
+      color: #e7e0e0;
       margin-top: 6px;
     }
     
     .countdown .message {
       margin-top: 12px;
-      color: #444;
+      font-size:xx-large;
+      font-weight: bold;
+      color: #155925;
     }
-    
+
+    .countdown .cd-message2 {
+      margin-top: 12px;
+      font-size:x-large;
+      font-weight:lighter;
+      color: #0a2d20fa;
+    }
     /* Effetto quando finisce (riusa i tuoi colori a gradiente) */
     .countdown.finished .box {
       color: #fff;
-      background: linear-gradient(45deg, #b30000, #ff0000, #006600, #009900);
+      background: linear-gradient(45deg, #27a925);
       box-shadow: 0 6px 14px rgba(0,0,0,0.25);
       animation: pop 0.6s ease-out;
     }
@@ -140,6 +148,7 @@
       </div>
     </div>
     <p id="cd-message" class="message"></p>
+    <p id="cd-message2" class="cd-message2"></p>
   </div>
   <!-- Contenitore link -->
   <div class="link-container">
@@ -162,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
     minutes: document.getElementById('cd-minutes'),
     seconds: document.getElementById('cd-seconds'),
     message: document.getElementById('cd-message'),
+    message2: document.getElementById('cd-message2'),
     root:    document.getElementById('countdown')
   };
 
@@ -169,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const year = now.getFullYear();
 
   // 21 novembre ore 00:00
-  let target = new Date(year, 10, 21, 0, 0, 0, 0);
+  let target = new Date(year, 8, 21, 0, 0, 0, 0);
 
   function two(n) {
     return String(n).padStart(2, '0');
@@ -181,7 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
     el.minutes.textContent = '00';
     el.seconds.textContent = '00';
     if (el.root) el.root.classList.add('finished');
-    if (el.message) el.message.textContent = 'È arrivato il 21 novembre! 🎉';
+    if (el.message) el.message.textContent = 'VI ASPETTIAMO! 🎉';
+    if (el.message2) el.message2.textContent = 'Visita il nostro profilo Instagram e il nostro sito per rimanere aggiornato!';
   }
 
   function update() {
@@ -219,7 +230,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </body>
 
 </html>
-
 
 
 
